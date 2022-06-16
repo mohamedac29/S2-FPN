@@ -1,6 +1,6 @@
 # S\textsuperscript{2}-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation
 
-This project contains the Pytorch implementation for the proposed S\textsuperscript{2}-FPN: [[Arxiv]](http://arxiv.org/abs/2206.07298).
+This project contains the Pytorch implementation for the proposed <sup>2</sup>-FPN: [[Arxiv]](http://arxiv.org/abs/2206.07298).
 
 ### Introduction
 
