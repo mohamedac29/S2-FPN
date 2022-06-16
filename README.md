@@ -7,11 +7,11 @@ This project contains the Pytorch implementation for the proposed S\textsuperscr
 Modern high-performance semantic segmentation methods employ a heavy backbone and dilated convolution to extract the relevant feature. Although extracting features with both contextual and semantic information is critical for the segmentation tasks, it brings a memory footprint and high computation cost for real-time applications. This paper presents a new model to achieve a trade-off between accuracy/speed for real-time road scene semantic segmentation. Specifially, we proposed a lightweight model named Scale-aware Strip Attention Guided Feature Pyramid Network (S2-FPN). Our network consists of three main modules: Attention Pyramid Fusion (APF) module, Scale-aware Strip Attention Module (SSAM), and Global Feature Upsample (GFU) module. APF adopts an attention mechanisms to learn discriminative multi-scale features and help close the semantic gap between different levels. APF uses the scale-aware attention to encode global context with vertical stripping operation and models the long-range dependencies, which helps relate pixels with similar semantic label. In addition, APF employs channel-wise reweighting block (CRB) to emphasize the channel features. Finally, the decoder of S2-FPN then adopts GFU, which is used to fuse features from APF and the encoder. Extensive experiments have been conducted on two challenging semantic segmentation benchmarks, which demonstrate that our approach achieves better accuracy/speed trade-off with different model settings. The proposed models have achieved a results of 76.2%mIoU/87.3FPS, 77.4%mIoU/67FPS, and 77.8%mIoU/30.5FPS on Cityscapes dataset, and 69.6%mIoU,71.0% mIoU,and 74.2% mIoU on Camvid dataset.
                 The detailed architecture of SSFPN
 
-<p align="center"><img width="90%" src="./demo_images/SSFPN_architecture.png" /></p>
+<p align="center"><img width="90%" src="./demo_images/scale_aware_network.jpg" /></p>
 
                 Dialted Spatial Attention Module
 
-<p align="center"><img width="75%" src="./demo_images/Dilated_spatial_attention.png" /></p>
+<p align="center"><img width="75%" src="./demo_images/spstrip_attention_fusion.jpg" /></p>
 
 ### Installation
 
