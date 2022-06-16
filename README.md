@@ -76,11 +76,11 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 - Training on Camvid datsaset
 ```
-python train.py --dataset camvid --model SSFPN --max_epochs 1000 --train_type trainval --lr 4e-3 --batch_size 8
+python train.py --dataset camvid --model SSFPN --max_epochs 150 --train_type trainval --lr 4e-3 --batch_size 8
 ```
 - Training on Camvid datsaset - train_type [trainval,trainval]
 ```
-python train.py --dataset cityscapes --model SSFPN --max_epochs 1000 --train_type trainval --lr 4e-3 --batch_size 8
+python train.py --dataset cityscapes --model SSFPN --max_epochs 500 --train_type trainval --lr 4e-3 --batch_size 8
 ```
 ### Testing 
 - Testing on Camvid datsaset
@@ -89,7 +89,7 @@ python test.py --dataset camvid --model SSFPN --checkpoint ./checkpoint/camvid/S
 ```
 - Testing on Cityscapes datsaset
 ```
-python test.py --dataset cityscapes --model SSFPN --checkpoint ./checkpoint/camvid/SSFPNbs8gpu1_trainval/model_150.pth --gpus 0
+python test.py --dataset cityscapes --model SSFPN --checkpoint ./checkpoint/cityscapes/SSFPNbs8gpu1_trainval/model_500.pth --gpus 0
 ```
 ### Inference Speed
 - Inference speed with input resolution 512x1024
