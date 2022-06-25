@@ -212,7 +212,7 @@ class SpatialAttention(nn.Module):
     def forward(self,x):
         b,c,h,w = x.size()
 
-        mxpool = F.avg_pool2d(x, [h, 1])#.view(b,c,-1).permute(0,2,1)
+        mxpool = F.max_pool2d(x, [h, 1])#.view(b,c,-1).permute(0,2,1)
         mxpool = F.conv2d(mxpool,self.conv_sh.weight,padding=0,dilation=1)
         mxpool = self.bn_sh1(mxpool)
         
