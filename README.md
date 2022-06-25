@@ -28,7 +28,7 @@ pip install opencv-python pillow numpy matplotlib
 
 ```
 git clone https://github.com/mohamedac29/S2-FPN
-cd S<sup>2</sup>-FPN
+cd S2-FPN
 ```
 
 3. Dataset
@@ -76,11 +76,11 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 - Training on Camvid datsaset
 ```
-python train.py --dataset camvid --model SSFPN --max_epochs 150 --train_type trainval --lr 4e-3 --batch_size 8
+python train.py --dataset camvid --model SSFPN --max_epochs 150 --train_type trainval --lr 3e-4 --batch_size 8
 ```
 - Training on Camvid datsaset - train_type [trainval,trainval]
 ```
-python train.py --dataset cityscapes --model SSFPN --max_epochs 500 --train_type trainval --lr 4e-3 --batch_size 8
+python train.py --dataset cityscapes --model SSFPN --max_epochs 500 --train_type trainval --lr 3e-4 --batch_size 8
 ```
 ### Testing 
 - Testing on Camvid datsaset
