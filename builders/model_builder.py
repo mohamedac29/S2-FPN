@@ -8,8 +8,8 @@ def build_model(model_name,num_classes):
         return DSANet(classes=num_classes)
     elif model_name == 'SPFNet':
         return SPFNet("resnet18",pretrained=True,classes=num_classes)
-    elif model_name == 'DSANet':
-        return DSANet("resnet18",pretrained=True,classes=num_classes)
+    elif model_name == 'SSFPN':
+        return SSFPN("resnet18",pretrained=True,classes=num_classes)
     else:
         raise NotImplementedError
     
