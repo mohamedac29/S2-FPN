@@ -44,15 +44,15 @@ class SSFPN(nn.Module):
         self.conv4_x = encoder.layer3  # 1/16
         self.conv5_x = encoder.layer4 # 1/32
         self.fab = nn.Sequential(
-            conv_block(512, 256, 3, 1, padding=1, group=256, dilation=1, bn_act=True),
+            conv_block(out_channels, 256, 3, 1, padding=1, group=256, dilation=1, bn_act=True),
             nn.Dropout(p=0.15))
 
 
         self.cfgb = nn.Sequential(
-            conv_block(512,512,3,2,padding=1,group=512,dilation=1,bn_act=True),
+            conv_block(out_channels,512,3,2,padding=1,group=512,dilation=1,bn_act=True),
             nn.Dropout(p=0.15))
 
-        self.apf1 = PyrmidFusionNet(512,512,256,classes=classes)
+        self.apf1 = PyrmidFusionNet(out_channels,out_channels,256,classes=classes)
         self.apf2 = PyrmidFusionNet(256,256,128,classes=classes)
         self.apf3 = PyrmidFusionNet(128,128,64,classes=classes)
         self.apf4 = PyrmidFusionNet(64,64,32,classes=classes)
