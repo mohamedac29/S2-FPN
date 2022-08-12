@@ -13,6 +13,13 @@ Modern high-performance semantic segmentation methods employ a heavy backbone an
 
 <p align="center"><img width="75%" src="./demo_images/spstrip_attention_fusion.jpg" /></p>
 
+### Updates
+
+1. S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it ResNet18 and 34.
+1. upload pretrained weights
+
+
+
 ### Installation
 
 1. Pyroch Environment
@@ -71,7 +78,15 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 ├── val
 └── valannot
 
+
 ```
+
+### Pretrained Weights
+
+You can download the pretrained weights 
+- Camvid Dataset 
+[SSFPN18] (https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)
+
 ### Training 
 
 - Training on Camvid datsaset
