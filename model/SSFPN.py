@@ -1,12 +1,9 @@
-import torch.nn as nn
+import os, sys
 import torch
+import torch.nn as nn
 from torchvision.models import resnet34, resnet50, resnet101, resnet152, resnet18
 from torchsummaryX import summary
 import torch.nn.functional as F
-from collections import OrderedDict
-import functools
-from functools import partial
-import os, sys
 from model.sync_batchnorm import SynchronizedBatchNorm2d
 
 __all__ = ['SSFPN']
