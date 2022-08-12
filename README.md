@@ -85,7 +85,7 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 You can download the pretrained weights 
 - Camvid Dataset 
-[SSFPN18] (https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)
+[SSFPN18](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)
 
 ### Training 
 
