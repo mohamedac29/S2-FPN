@@ -1,9 +1,12 @@
-import os, sys
-import torch
 import torch.nn as nn
+import torch
 from torchvision.models import resnet34, resnet50, resnet101, resnet152, resnet18
 from torchsummaryX import summary
 import torch.nn.functional as F
+from collections import OrderedDict
+import functools
+from functools import partial
+import os, sys
 from model.sync_batchnorm import SynchronizedBatchNorm2d
 
 __all__ = ['SSFPN']
@@ -134,6 +137,13 @@ class SSFPN(nn.Module):
         else:
             return predict
 
+    # def freeze_bn(self):
+    #     for m in self.modules():
+    #         if isinstance(m,SynchronizedBatchNorm2d):
+    #             m.eval()
+    #         elif isinstance(m,nn.BatchNorm2d):
+    #             m.eval()
+
 
 class PyrmidFusionNet(nn.Module):
     def __init__(self, channels_high, channels_low, channel_out, classes=11):
@@ -203,6 +213,18 @@ class GlobalFeatureUpsample(nn.Module):
         out = y_up + x_gui
 
         return self.conv3(out)
+
+    # def _init_weight(self):
+    #     for m in self.modules():
+    #         if isinstance(m,nn.Conv2d):
+    #             nn.init.kaiming_normal_(m.weight)
+    #         elif isinstance(m,SynchronizedBatchNorm2d):
+    #             m.weight.data.fill_(1)
+    #             m.bias.data.zero_()
+    #         elif isinstance(m,nn.BatchNorm2d):
+    #             m.weight.data.fill_(1)
+    #             m.weight.data.zero_()
+
 
 class conv_block(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding, dilation=(1, 1), group=1, bn_act=False,
