@@ -1,13 +1,12 @@
-import torch.nn as nn
+
 import torch
-from torchvision.models import resnet34, resnet50, resnet101, resnet152, resnet18
-from torchsummaryX import summary
+import torch.nn as nn
 import torch.nn.functional as F
-from collections import OrderedDict
-import functools
-from functools import partial
-import os, sys
+from torchsummaryX import summary
 from model.sync_batchnorm import SynchronizedBatchNorm2d
+from torchvision.models import resnet34, resnet50, resnet101, resnet152, resnet18
+
+
 
 __all__ = ['SSFPN']
 
@@ -119,7 +118,7 @@ class SSFPN(nn.Module):
 
         FAB = self.fab(x5)
 
-        dec5 = self.gfu4(APF1, FAB)  # [2, 512, 16, 16]
+        dec5 = self.gfu4(APF1, FAB)  
         dec4 = self.gfu3(APF2, dec5)
         dec3 = self.gfu2(APF3, dec4)
         dec2 = self.gfu1(APF4, dec3)
@@ -136,14 +135,6 @@ class SSFPN(nn.Module):
             return predict, sup1, sup2, sup3, sup4
         else:
             return predict
-
-    # def freeze_bn(self):
-    #     for m in self.modules():
-    #         if isinstance(m,SynchronizedBatchNorm2d):
-    #             m.eval()
-    #         elif isinstance(m,nn.BatchNorm2d):
-    #             m.eval()
-
 
 class PyrmidFusionNet(nn.Module):
     def __init__(self, channels_high, channels_low, channel_out, classes=11):
@@ -203,8 +194,6 @@ class GlobalFeatureUpsample(nn.Module):
             nn.ReLU(inplace=True))
         self.conv3 = conv_block(out_channels, out_channels, kernel_size=1, stride=1, padding=0, bn_act=True)
 
-        # self._init_weight()
-
     def forward(self, x_gui, y_high):
         h, w = x_gui.size(2), x_gui.size(3)
         y_up = nn.Upsample(size=(h, w), mode='bilinear', align_corners=True)(y_high)
@@ -214,16 +203,6 @@ class GlobalFeatureUpsample(nn.Module):
 
         return self.conv3(out)
 
-    # def _init_weight(self):
-    #     for m in self.modules():
-    #         if isinstance(m,nn.Conv2d):
-    #             nn.init.kaiming_normal_(m.weight)
-    #         elif isinstance(m,SynchronizedBatchNorm2d):
-    #             m.weight.data.fill_(1)
-    #             m.bias.data.zero_()
-    #         elif isinstance(m,nn.BatchNorm2d):
-    #             m.weight.data.fill_(1)
-    #             m.weight.data.zero_()
 
 
 class conv_block(nn.Module):
