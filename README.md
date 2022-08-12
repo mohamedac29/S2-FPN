@@ -88,9 +88,9 @@ You can download the pretrained weights
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| Cityscapes | ResNet18 |    |****  |  |  |
-| Cityscapes | ResNet34 |    |****  |  |  |
-| Cityscapes | ResNet34M|    |****  |  |  |
+| Cityscapes | ResNet18 |    |  |  |  |
+| Cityscapes | ResNet34 |    |  |  |  |
+| Cityscapes | ResNet34M|    |  |  |  |
 | CamVid     | ResNet18 |  trainval  | **69.5%** |  | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
 | CamVid     | ResNet34 |  trainval  | **71.0%** |  |     |
 | CamVid     | ResNet34M |  trainval  | **74.2%**  |  |         |
