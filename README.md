@@ -84,16 +84,16 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 ### Pretrained Weights
 
 You can download the pretrained weights 
-- Camvid and Cityscapes Datasets
+- Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
 | Cityscapes | ResNet18 |    |  |  |  |
 | Cityscapes | ResNet34 |    |  |  |  |
 | Cityscapes | ResNet34M|    |  |  |  |
-| CamVid     | ResNet18 |  trainval  | **69.5%** |  | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
-| CamVid     | ResNet34 |  trainval  | **71.0%** |  |     |
-| CamVid     | ResNet34M |  trainval  | **74.2%**  |  |         |
+| CamVid     | ResNet18 |  trainval  | **69.5%** | 124.2 | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
+| CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
+| CamVid     | ResNet34M |  trainval  | **74.2%**  |55.5  |         |
 
 
 
