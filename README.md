@@ -84,14 +84,14 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 ### Pretrained Weights
 
 You can download the pretrained weights 
-- Camvid Dataset 
+- Camvid and Cityscapes Datasets
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| Cityscapes | ResNet18 |  trainval  |  |  |  |
-| CamVid     | ResNet18 |  trainval  |  |  | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
-| CamVid     | ResNet34 |  trainval  |  |  |     |
-| CamVid     | ResNet34M |  trainval  |  |  |         |
+| Cityscapes | ResNet18 |  trainval  |****  |  |  |
+| CamVid     | ResNet18 |  trainval  | **69.5%** |  | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
+| CamVid     | ResNet34 |  trainval  | **71.0%** |  |     |
+| CamVid     | ResNet34M |  trainval  | **74.2%**  |  |         |
 
 
 
