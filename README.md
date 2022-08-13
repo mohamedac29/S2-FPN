@@ -15,7 +15,7 @@ Modern high-performance semantic segmentation methods employ a heavy backbone an
 
 ### Updates
 
-1. S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it ResNet18 and 34.
+1. S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it with ResNet18 and 34.
 1. upload pretrained weights
 
 
@@ -83,7 +83,8 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 ### Pretrained Weights
 
-You can download the pretrained weights 
+You can download the pretrained weights. There are some differences in the 
+accuracy listed here
 - Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
