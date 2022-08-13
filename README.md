@@ -122,3 +122,17 @@ python test.py --dataset cityscapes --model SSFPN --checkpoint ./checkpoint/city
 ```
 python eval_fps.py 512,1024
 ```
+
+### Citation
+
+If you find this work useful in your research, please consider citing.
+
+```
+@article{elhassan2022s,
+  title={S<sup>2</sup>-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation},
+  author={Elhassan, Mohammed AM and Yang, Chenhui and Huang, Chenxi and Legesse Munea, Tewodros and Hong, Xin},
+  journal={arXiv e-prints},
+  pages={arXiv--2206},
+  year={2022}
+}
+```
