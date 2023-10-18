@@ -88,14 +88,14 @@ You can download the pretrained weights. There are some differences in the
 accuracy listed here
 - Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
 
-|Model |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
+|Model |     Dataset      |  Pretrained  | Train type |  test (mIoU)    |  FPS  |                                                                    model                                                                     |
 | :--------------:| :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
 |S2FPN18| Cityscapes | ResNet18 |  train  | **76.7%** | 84.2 | [ckpt](https://drive.google.com/file/d/1WDiguApZiHeelUzZwoJhaL52tZMHlq8F/view?usp=share_link)|
 |S2FPN34| Cityscapes | ResNet34 |  train  | **77.4%**  | 64.4 | [ckpt](https://drive.google.com/file/d/1j4seqf67HW7_OKIPTGLuC-oTehwppIHB/view?usp=share_link) |
 |S2FPN34M| Cityscapes | ResNet34M|  train  | **78.2%**  | 28.5 |  |
-|S2FPN18| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt]()         |
-|S2FPN34| CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
-|S2FPN34M| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt]()       |
+|S2FPN18| CamVid     | ResNet18 |  trainval  | **70.4%** | 122.2 | [ckpt](https://drive.google.com/file/d/1-rQCfzlwENo_KRDwyaWPLMqoox-e-5LL/view?usp=share_link)         |
+|S2FPN34| CamVid     | ResNet34 |  trainval  | **71.2%** | 104.2 |  [ckpt]()   |
+|S2FPN34M| CamVid     | ResNet34M |  trainval  | **74.5%**  |53.4  | [ckpt](https://drive.google.com/file/d/13H-foMl4utJqOXXHd8dZxWonk8a3hiTl/view?usp=share_link)       |
 
 
 
