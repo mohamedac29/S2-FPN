@@ -17,12 +17,11 @@ Modern high-performance semantic segmentation methods employ a heavy backbone an
 
 ### Updates
 
-1. S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it with ResNet18 and 34.
-1. upload pretrained weights
+- S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it with ResNet18 and 34.
+- upload pretrained weights
 
-# 18/10/2023
-- we update the scale-aware attention block and updated with new model. Now you can use the new models as S2FPN and the old one is changed to S2FPNv1
-
+- 18/10/2023 we updated the scale-aware attention block and updated with new model. Now you can use the new models as S2FPN and the old one is changed to S2FPNv1
+- Our paper was marked as state of the art in [Papers with Code](https://paperswithcode.com/task/real-time-semantic-segmentation).
 
 ### Installation
 
