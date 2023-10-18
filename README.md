@@ -89,7 +89,7 @@ accuracy listed here
 - Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
 
 |Model |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
-| :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
+| :--------------:| :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
 |S2FPN18| Cityscapes | ResNet18 |  train  | **76.7%** | 84.2 | [ckpt](https://drive.google.com/file/d/1WDiguApZiHeelUzZwoJhaL52tZMHlq8F/view?usp=share_link)|
 |S2FPN34| Cityscapes | ResNet34 |  train  | **77.4%**  | 64.4 | [ckpt](https://drive.google.com/file/d/1j4seqf67HW7_OKIPTGLuC-oTehwppIHB/view?usp=share_link) |
 |S2FPN34M| Cityscapes | ResNet34M|  train  | **78.2%**  | 28.5 |  |
