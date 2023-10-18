@@ -1,18 +1,16 @@
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchsummaryX import summary
-from model.sync_batchnorm import SynchronizedBatchNorm2d
+from models.sync_batchnorm import SynchronizedBatchNorm2d
 from torchvision.models import resnet34, resnet50, resnet101, resnet152, resnet18
-
-
-
+from models.common_blocks import ScaleAwareBlock
 __all__ = ['SSFPN']
 
 
 class SSFPN(nn.Module):
-    def __init__(self, backbone,
+    def __init__(self,
+                 backbone='resnet18',
                  pretrained=True,
                  ResNet34M= False,
                  classes=11):
@@ -33,8 +31,7 @@ class SSFPN(nn.Module):
         else:
             raise NotImplementedError("{} Backbone not implemented".format(backbone))
 
-        self.out_channels = [32,64,128,256,512,1024,2048]
-        # self.conv1 = nn.Sequential(encoder.conv1, encoder.bn1, encoder.relu, encoder.maxpool)
+        self.channels = [32,64,128,256,512,1024,2048]
         self.conv1_x = encoder.conv1
         self.bn1 = encoder.bn1
         self.relu = encoder.relu
@@ -44,50 +41,48 @@ class SSFPN(nn.Module):
         self.conv4_x = encoder.layer3  # 1/16
         self.conv5_x = encoder.layer4  # 1/32
 
-        # if backbone in ['resnet50','resnet101','resnet152']:
-        self.down2 = conv_block(self.out_channels[-4], self.out_channels[1], 3, 1, 1, 1, 1, bn_act=True)
-        self.down3 = conv_block(self.out_channels[-3], self.out_channels[2], 3, 1, 1, 1, 1, bn_act=True)
-        self.down4 = conv_block(self.out_channels[-2], self.out_channels[3], 3, 1, 1, 1, 1, bn_act=True)
-        self.down5 = conv_block(self.out_channels[-1], self.out_channels[4], 3, 1, 1, 1, 1, bn_act=True)
+        if self.backbone in ['resnet50','resnet101','resnet152']:
+            self.down2 = conv_block(self.channels[-4], self.channels[1], 3, 1, 1, 1, 1, bn_act=True)
+            self.down3 = conv_block(self.channels[-3], self.channels[2], 3, 1, 1, 1, 1, bn_act=True)
+            self.down4 = conv_block(self.channels[-2], self.channels[3], 3, 1, 1, 1, 1, bn_act=True)
+            self.down5 = conv_block(self.channels[-1], self.channels[4], 3, 1, 1, 1, 1, bn_act=True)
 
         self.fab = nn.Sequential(
-            conv_block(self.out_channels[4],
-                       self.out_channels[4]//2,
-                       kernel_size = 3,
-                       stride= 1,
+            conv_block(self.channels[4],
+                       self.channels[4] // 2,
+                       kernel_size=3,
+                       stride=1,
                        padding=1,
-                       group=self.out_channels[4]//2,
+                       group=self.channels[4] // 2,
                        dilation=1,
                        bn_act=True),
-                       nn.Dropout(p=0.15))
+            nn.Dropout(p=0.15))
 
         self.cfgb = nn.Sequential(
-            conv_block(self.out_channels[4],
-                       self.out_channels[4],
-                       kernel_size =3,
-                       stride= 2,
-                       padding = 1,
-                       group=self.out_channels[4],
+            conv_block(self.channels[4],
+                       self.channels[4],
+                       kernel_size=3,
+                       stride=2,
+                       padding=1,
+                       group=self.channels[4],
                        dilation=1,
                        bn_act=True),
-                       nn.Dropout(p=0.15))
+            nn.Dropout(p=0.15))
+
+        self.gfu4 = GlobalFeatureUpsample(self.channels[3], self.channels[3], self.channels[3])
+        self.gfu3 = GlobalFeatureUpsample(self.channels[2], self.channels[3], self.channels[2])
+        self.gfu2 = GlobalFeatureUpsample(self.channels[1], self.channels[2], self.channels[1])
+        self.gfu1 = GlobalFeatureUpsample(self.channels[0], self.channels[1], self.channels[0])
+
+
+        self.apf1 = PyrmidFusionNet(self.channels[4], self.channels[4], self.channels[3], classes=classes)
+        self.apf2 = PyrmidFusionNet(self.channels[3], self.channels[3], self.channels[2], classes=classes)
+        self.apf3 = PyrmidFusionNet(self.channels[2], self.channels[2], self.channels[1], classes=classes)
+        self.apf4 = PyrmidFusionNet(self.channels[1], self.channels[1], self.channels[0], classes=classes)
 
 
 
-        self.gfu4 = GlobalFeatureUpsample(self.out_channels[3], self.out_channels[3], self.out_channels[3])
-        self.gfu3 = GlobalFeatureUpsample(self.out_channels[2], self.out_channels[3], self.out_channels[2])
-        self.gfu2 = GlobalFeatureUpsample(self.out_channels[1], self.out_channels[2], self.out_channels[1])
-        self.gfu1 = GlobalFeatureUpsample(self.out_channels[0], self.out_channels[1], self.out_channels[0])
-
-
-        self.apf1 = PyrmidFusionNet(self.out_channels[4], self.out_channels[4], self.out_channels[3], classes=classes)
-        self.apf2 = PyrmidFusionNet(self.out_channels[3], self.out_channels[3], self.out_channels[2], classes=classes)
-        self.apf3 = PyrmidFusionNet(self.out_channels[2], self.out_channels[2], self.out_channels[1], classes=classes)
-        self.apf4 = PyrmidFusionNet(self.out_channels[1], self.out_channels[1], self.out_channels[0], classes=classes)
-
-
-
-        self.classifier = SegHead(self.out_channels[0], classes)
+        self.seghead = SegHead(self.channels[0], classes)
 
     def forward(self, x):
         B, C, H, W = x.size()
@@ -118,23 +113,23 @@ class SSFPN(nn.Module):
 
         FAB = self.fab(x5)
 
-        dec5 = self.gfu4(APF1, FAB)  
+        dec5 = self.gfu4(APF1, FAB)
         dec4 = self.gfu3(APF2, dec5)
         dec3 = self.gfu2(APF3, dec4)
         dec2 = self.gfu1(APF4, dec3)
 
-        classifier = self.classifier(dec2)
+        seghead = self.seghead(dec2)
 
         sup1 = F.interpolate(cls1, size=(H, W), mode="bilinear", align_corners=True)
         sup2 = F.interpolate(cls2, size=(H, W), mode="bilinear", align_corners=True)
         sup3 = F.interpolate(cls3, size=(H, W), mode="bilinear", align_corners=True)
         sup4 = F.interpolate(cls4, size=(H, W), mode="bilinear", align_corners=True)
-        predict = F.interpolate(classifier, size=(H, W), mode="bilinear", align_corners=True)
+        seghead = F.interpolate(seghead, size=(H, W), mode="bilinear", align_corners=True)
 
         if self.training:
-            return predict, sup1, sup2, sup3, sup4
+            return seghead, sup1, sup2, sup3, sup4
         else:
-            return predict
+            return seghead
 
 class PyrmidFusionNet(nn.Module):
     def __init__(self, channels_high, channels_low, channel_out, classes=11):
@@ -143,8 +138,13 @@ class PyrmidFusionNet(nn.Module):
         self.lateral_low = conv_block(channels_low, channels_high, 1, 1, bn_act=True, padding=0)
 
         self.conv_low = conv_block(channels_high, channel_out, 3, 1, bn_act=True, padding=1)
-        self.sa = SpatialAttention(channel_out, channel_out)
-
+        self.sa = ScaleAwareBlock(
+                                channel_out,
+                                key_dim=16,
+                                num_heads=8,
+                                mlp_ratio=1,
+                                attn_ratio=1,
+                                num_layers=1)
         self.conv_high = conv_block(channels_high, channel_out, 3, 1, bn_act=True, padding=1)
         self.ca = ChannelWise(channel_out)
 
@@ -192,79 +192,95 @@ class GlobalFeatureUpsample(nn.Module):
         self.conv2 = nn.Sequential(
             conv_block(in_channels, out_channels, kernel_size=1, stride=1, padding=0, bn_act=False),
             nn.ReLU(inplace=True))
-        self.conv3 = conv_block(out_channels, out_channels, kernel_size=1, stride=1, padding=0, bn_act=True)
+        self.conv3 = conv_block(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bn_act=True)
+
+        self.s1 = conv_block(out_channels//2, out_channels, kernel_size=3, stride=1, padding=1, bn_act=True)
+        self.s2 = nn.Sequential(
+            conv_block(out_channels//2, out_channels, kernel_size=1, stride=1, padding=0, bn_act=False),
+            SynchronizedBatchNorm2d(out_channels),
+            nn.Sigmoid())
+
+        self.fuse = conv_block(2*out_channels, out_channels, kernel_size=3, stride=1, padding=1, bn_act=True)
 
     def forward(self, x_gui, y_high):
         h, w = x_gui.size(2), x_gui.size(3)
         y_up = nn.Upsample(size=(h, w), mode='bilinear', align_corners=True)(y_high)
         x_gui = self.conv1(x_gui)
-        y_up = F.avg_pool2d(self.conv2(y_up), (1, 1))
-        out = y_up + x_gui
+        y_up = self.conv2(y_up)
+        fuse = y_up + x_gui
+        fuse = self.conv3(fuse)
+        s1,s2 = torch.chunk(fuse,2,dim=1)
+        s1 = self.s1(s1)
+        s2 = self.s2(s2)
 
-        return self.conv3(out)
+        ml1 = s1 * y_up
+        ml2 = s2 * x_gui
+        out = torch.cat([ml1,ml2],1)
+        out = self.fuse(out)
 
-
-
-class conv_block(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride, padding, dilation=(1, 1), group=1, bn_act=False,
-                 bias=False):
-        super(conv_block, self).__init__()
-        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride,
-                              padding=padding, dilation=dilation, groups=group, bias=bias)
-        self.bn = SynchronizedBatchNorm2d(out_channels)
-        self.act = nn.ReLU(inplace=False)
-        self.use_bn_act = bn_act
-
-    def forward(self, x):
-        if self.use_bn_act:
-            return self.act(self.bn(self.conv(x)))
-        else:
-            return self.conv(x)
+        return out
 
 
-class SegHead(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        super(SegHead, self).__init__()
 
-        self.fc = conv_block(in_channels, out_channels, kernel_size=1, stride=1, padding=0)
-
-    def forward(self, x):
-
-        return self.fc(x)
-
-
-class SpatialAttention(nn.Module):
+class ScaleAwareStripAttention(nn.Module):
     def __init__(self, in_ch, out_ch, droprate=0.15):
-        super(SpatialAttention, self).__init__()
+        super(ScaleAwareStripAttention, self).__init__()
+        self.dconv1 = conv_block(in_ch, in_ch // 2, kernel_size=3, stride=1, padding=2, dilation=2, bn_act=True)
+        self.dconv2 = conv_block(in_ch, in_ch // 2, kernel_size=3, stride=1, padding=4, dilation=4, bn_act=True)
         self.conv_sh = nn.Conv2d(in_ch, in_ch, kernel_size=1, stride=1, padding=0)
         self.bn_sh1 = nn.BatchNorm2d(in_ch)
         self.bn_sh2 = nn.BatchNorm2d(in_ch)
+        self.augmment_conv = nn.Conv2d(in_ch, in_ch, kernel_size=1, stride=1, padding=0)
+        self.conv_v = nn.Conv2d(in_ch, in_ch, kernel_size=1, stride=1, padding=0)
         self.conv_res = nn.Conv2d(in_ch, in_ch, kernel_size=1, stride=1, padding=0)
         self.drop = droprate
-        self.fuse = conv_block(in_ch, out_ch, kernel_size=1, stride=1, padding=0, bn_act=False)
+        self.fuse = conv_block(in_ch, in_ch, kernel_size=1, stride=1, padding=0, bn_act=False)
+        self.fuse_out = conv_block(in_ch, out_ch, kernel_size=1, stride=1, padding=0, bn_act=False)
         self.gamma = nn.Parameter(torch.zeros(1))
 
     def forward(self, x):
         b, c, h, w = x.size()
 
-        mxpool = F.max_pool2d(x, [h, 1])  # .view(b,c,-1).permute(0,2,1)
+        d1 = self.dconv1(x)
+        d2 = self.dconv2(x)
+        dd = torch.cat([d1, d2], 1)
+
+        mxpool = F.max_pool2d(dd, [h, 1])  #
         mxpool = F.conv2d(mxpool, self.conv_sh.weight, padding=0, dilation=1)
         mxpool = self.bn_sh1(mxpool)
+        mxpool_v= mxpool.view(b,c,-1).permute(0,2,1)
 
-        avgpool = F.avg_pool2d(x, [h, 1])  # .view(b,c,-1)
-        avgpool = F.conv2d(avgpool, self.conv_sh.weight, padding=0, dilation=1)
+        #
+        avgpool = F.conv2d(dd, self.conv_sh.weight, padding=0, dilation=1)
         avgpool = self.bn_sh2(avgpool)
+        avgpool_v = avgpool.view(b,c,-1)
 
-        att = torch.softmax(torch.mul(mxpool, avgpool), 1)
+        att = torch.bmm(mxpool_v, avgpool_v)
+        att = torch.softmax(att, 1)
+
+        v = F.avg_pool2d(dd, [h, 1])
+        v = self.conv_v(v)
+        v = v.view(b,c,-1)
+        att = torch.bmm(v,att)
+        att = att.view(b,c,h,w)
+        att = self.augmment_conv(att)
+        att = torch.sigmoid(att)
         attt1 = att[:, 0, :, :].unsqueeze(1)
         attt2 = att[:, 1, :, :].unsqueeze(1)
-
         fusion = attt1 * avgpool + attt2 * mxpool
         out = F.dropout(self.fuse(fusion), p=self.drop, training=self.training)
-
-        # out = out.expand(residual.shape[0],residual.shape[1],residual.shape[2],residual.shape[3])
         out = F.relu(self.gamma * out + (1 - self.gamma) * x)
+        out = self.fuse_out(out)
+
         return out
+
+
+class SegHead(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super(SegHead, self).__init__()
+        self.fc = conv_block(in_channels, out_channels, kernel_size=1, stride=1, padding=0)
+    def forward(self, x):
+        return self.fc(x)
 
 
 class ChannelWise(nn.Module):
@@ -287,4 +303,3 @@ if __name__ == "__main__":
     model = SSFPN("resnet18",ResNet34M=False)
     summary(model, torch.rand((2, 3, 360, 480)))
 
-    # python train_cityscapes.py --dataset camvid --model MSFFNet --batch_size 4 --max_epochs 300 --train_type trainval --lr 1e-3
