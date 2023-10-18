@@ -88,14 +88,14 @@ You can download the pretrained weights. There are some differences in the
 accuracy listed here
 - Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
 
-|     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
+|Model |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| Cityscapes | ResNet18 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)|
-| Cityscapes | ResNet34v1 |    |  |  |  |
-| Cityscapes | ResNet34Mv1|    |  |  |  |
-| CamVid     | ResNet18v1 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
-| CamVid     | ResNet34v1 |  trainval  | **71.0%** | 107.2 |     |
-| CamVid     | ResNet34Mv1 |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=share_link)       |
+|S2FPN18| Cityscapes | ResNet18 |  train  | **76.7%** | 84.2 | [ckpt](https://drive.google.com/file/d/1WDiguApZiHeelUzZwoJhaL52tZMHlq8F/view?usp=share_link)|
+|S2FPN34| Cityscapes | ResNet34 |  train  | **77.4%**  | 64.4 | [ckpt](https://drive.google.com/file/d/1j4seqf67HW7_OKIPTGLuC-oTehwppIHB/view?usp=share_link) |
+|S2FPN34M| Cityscapes | ResNet34M|  train  | **78.2%**  | 28.5 |  |
+|S2FPN18| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt]()         |
+|S2FPN34| CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
+|S2FPN34M| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt]()       |
 
 
 
@@ -110,9 +110,9 @@ accuracy listed here
 | Cityscapes | ResNet18v1 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1Q_wFh9W9SmSOR1f4PVY7LD_Rztl0IIFB/view?usp=share_link)|
 | Cityscapes | ResNet34 |    |  |  |  |
 | Cityscapes | ResNet34M|    |  |  |  |
-| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=share_link)         |
+| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt]()         |
 | CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
-| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)       |
+| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt]()       |
 
 
 
