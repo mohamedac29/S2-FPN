@@ -1,4 +1,6 @@
-# S<sup>2</sup>-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation
+# S2-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/s-textsuperscript-2-fpn-scale-ware-strip/real-time-semantic-segmentation-on-camvid)](https://paperswithcode.com/sota/real-time-semantic-segmentation-on-camvid?p=s-textsuperscript-2-fpn-scale-ware-strip) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/s-textsuperscript-2-fpn-scale-ware-strip/real-time-semantic-segmentation-on-cityscapes-3)](https://paperswithcode.com/sota/real-time-semantic-segmentation-on-cityscapes-3?p=s-textsuperscript-2-fpn-scale-ware-strip) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/s-textsuperscript-2-fpn-scale-ware-strip/semantic-segmentation-on-cityscapes-2)](https://paperswithcode.com/sota/semantic-segmentation-on-cityscapes-2?p=s-textsuperscript-2-fpn-scale-ware-strip)
 
 This project contains the Pytorch implementation for the proposed S<sup>2</sup>-FPN: [[Arxiv]](http://arxiv.org/abs/2206.07298).
 
