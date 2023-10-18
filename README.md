@@ -94,7 +94,7 @@ accuracy listed here
 |S2FPN34| Cityscapes | ResNet34 |  train  | **77.4%**  | 64.4 | [ckpt](https://drive.google.com/file/d/1j4seqf67HW7_OKIPTGLuC-oTehwppIHB/view?usp=share_link) |
 |S2FPN34M| Cityscapes | ResNet34M|  train  | **78.2%**  | 28.5 |  |
 |S2FPN18| CamVid     | ResNet18 |  trainval  | **70.4%** | 122.2 | [ckpt](https://drive.google.com/file/d/1-rQCfzlwENo_KRDwyaWPLMqoox-e-5LL/view?usp=share_link)         |
-|S2FPN34| CamVid     | ResNet34 |  trainval  | **71.2%** | 104.2 |  [ckpt]()   |
+|S2FPN34| CamVid     | ResNet34 |  trainval  | **71.2%** | 104.2 |  [ckpt](https://drive.google.com/file/d/19Sp1PQLU4AuLOi64Fx4hMEr7k_1Ekefe/view?usp=share_link)   |
 |S2FPN34M| CamVid     | ResNet34M |  trainval  | **74.5%**  |53.4  | [ckpt](https://drive.google.com/file/d/13H-foMl4utJqOXXHd8dZxWonk8a3hiTl/view?usp=share_link)       |
 
 
@@ -110,9 +110,9 @@ accuracy listed here
 | Cityscapes | ResNet18v1 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1Q_wFh9W9SmSOR1f4PVY7LD_Rztl0IIFB/view?usp=share_link)|
 | Cityscapes | ResNet34 |    |  |  |  |
 | Cityscapes | ResNet34M|    |  |  |  |
-| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt]()         |
+| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=share_link)         |
 | CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
-| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt]()       |
+| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=share_link)       |
 
 
 
