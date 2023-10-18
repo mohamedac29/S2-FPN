@@ -18,6 +18,8 @@ Modern high-performance semantic segmentation methods employ a heavy backbone an
 1. S2FPN works with [ResNet18,ResNet34,ResNet50,ResNet101,ResNet152]. We tested it with ResNet18 and 34.
 1. upload pretrained weights
 
+# 18/10/2023
+- we update the scale-aware attention block and updated with new model. Now you can use the new models as S2FPN and the old one is changed to S2FPNv1
 
 
 ### Installation
@@ -80,8 +82,24 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 
 ```
+### Pretrained Weights for the old version S2FPNv1
 
-### Pretrained Weights
+You can download the pretrained weights. There are some differences in the 
+accuracy listed here
+- Camvid and Cityscapes Datasets. FPS computed based on GTX1080Ti
+
+|     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
+| :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
+| Cityscapes | ResNet18 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)|
+| Cityscapes | ResNet34v1 |    |  |  |  |
+| Cityscapes | ResNet34Mv1|    |  |  |  |
+| CamVid     | ResNet18v1 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
+| CamVid     | ResNet34v1 |  trainval  | **71.0%** | 107.2 |     |
+| CamVid     | ResNet34Mv1 |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=share_link)       |
+
+
+
+### Pretrained Weights for the old version S2FPNv1
 
 You can download the pretrained weights. There are some differences in the 
 accuracy listed here
