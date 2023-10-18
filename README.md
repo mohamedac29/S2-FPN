@@ -82,7 +82,7 @@ You need to download the [Cityscapes](https://www.cityscapes-dataset.com/), and 
 
 
 ```
-### Pretrained Weights for the old version S2FPNv1
+### Pretrained Weights for the old version S2FPN
 
 You can download the pretrained weights. There are some differences in the 
 accuracy listed here
@@ -107,10 +107,10 @@ accuracy listed here
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| Cityscapes | ResNet18 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)|
+| Cityscapes | ResNet18v1 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1Q_wFh9W9SmSOR1f4PVY7LD_Rztl0IIFB/view?usp=share_link)|
 | Cityscapes | ResNet34 |    |  |  |  |
 | Cityscapes | ResNet34M|    |  |  |  |
-| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
+| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=share_link)         |
 | CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
 | CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)       |
 
