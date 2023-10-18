@@ -89,12 +89,12 @@ accuracy listed here
 
 |     Dataset      |  Pretrained  | Train type |    mIoU    |  FPS  |                                                                    model                                                                     |
 | :--------------: | :----------: | :--------: | :--------: | :---: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| Cityscapes | ResNet18 |    |  |  |  |
+| Cityscapes | ResNet18 |  train  | **76.3%** | 87.3 | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)|
 | Cityscapes | ResNet34 |    |  |  |  |
 | Cityscapes | ResNet34M|    |  |  |  |
-| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [weight](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
+| CamVid     | ResNet18 |  trainval  | **70.1%** | 124.2 | [ckpt](https://drive.google.com/file/d/1H1iTzYaP8CbuDeeW0phnvCTBigHe8CD8/view?usp=sharing)         |
 | CamVid     | ResNet34 |  trainval  | **71.0%** | 107.2 |     |
-| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  |  [weight](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)       |
+| CamVid     | ResNet34M |  trainval  | **74.76%**  |55.5  | [ckpt](https://drive.google.com/file/d/1XI8jNAm1C5anW9ExJvneddhYAaIPdOHa/view?usp=sharing)       |
 
 
 
