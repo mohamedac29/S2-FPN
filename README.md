@@ -149,7 +149,7 @@ If you find this work useful in your research, please consider citing.
 
 ```
 @article{elhassan2022s,
-  title={S<sup>2</sup>-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation},
+  title={S2-FPN: Scale-ware Strip Attention Guided Feature Pyramid Network for Real-time Semantic Segmentation},
   author={Elhassan, Mohammed AM and Yang, Chenhui and Huang, Chenxi and Legesse Munea, Tewodros and Hong, Xin},
   journal={arXiv e-prints},
   pages={arXiv--2206},
